@@ -1,0 +1,162 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="favouritesEntity"
+            type="com.rajit.foodies.data.database.entities.FavouritesEntity" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/favouriteRecipesRowLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/favScreenRootBackground">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/favourite_rowCardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/strokeColor"
+            app:strokeWidth="1dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/cardBackgroundColor">
+
+                <ImageView
+                    android:id="@+id/favourite_itemImage"
+                    android:layout_width="150dp"
+                    android:layout_height="0dp"
+                    android:contentDescription="@string/recipe_image"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/sample"
+                    android:loadImage="@{favouritesEntity.resultRecipe.image}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/favourite_itemTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/courgette"
+                    android:maxLines="2"
+                    android:textColor="@color/titleColor"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:text="@{favouritesEntity.resultRecipe.title}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/favourite_itemImage"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Recipe Title" />
+
+                <TextView
+                    android:id="@+id/favourite_itemDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:textColor="@color/descriptionColor"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:parseHtml="@{favouritesEntity.resultRecipe.summary}"
+                    app:layout_constraintEnd_toEndOf="@+id/favourite_itemTitle"
+                    app:layout_constraintStart_toStartOf="@+id/favourite_itemTitle"
+                    app:layout_constraintTop_toBottomOf="@id/favourite_itemTitle"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
+
+                <ImageView
+                    android:id="@+id/favourite_like_imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="36dp"
+                    android:contentDescription="@string/aggregate_likes_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="@+id/favourite_itemDescription"
+                    app:layout_constraintTop_toBottomOf="@+id/favourite_itemDescription"
+                    app:layout_constraintVertical_bias="0.069"
+                    app:srcCompat="@drawable/ic_like"
+                    app:tint="@color/red" />
+
+                <TextView
+                    android:id="@+id/favourite_like_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/red"
+                    android:text="@{String.valueOf(favouritesEntity.resultRecipe.aggregateLikes)}"
+                    app:layout_constraintEnd_toEndOf="@+id/favourite_like_imageView"
+                    app:layout_constraintStart_toStartOf="@+id/favourite_like_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/favourite_like_imageView"
+                    tools:text="2769" />
+
+                <ImageView
+                    android:id="@+id/favourite_time_imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:contentDescription="@string/cooking_time_icon"
+                    app:layout_constraintStart_toEndOf="@+id/favourite_like_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/favourite_like_imageView"
+                    app:srcCompat="@drawable/ic_clock"
+                    app:tint="@color/yellow" />
+
+                <TextView
+                    android:id="@+id/favourite_time_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/yellow"
+                    android:text="@{String.valueOf(favouritesEntity.resultRecipe.readyInMinutes)}"
+                    app:layout_constraintEnd_toEndOf="@+id/favourite_time_imageView"
+                    app:layout_constraintStart_toStartOf="@+id/favourite_time_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/favourite_time_imageView"
+                    tools:text="1" />
+
+                <ImageView
+                    android:id="@+id/favourite_vegan_imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:isVegan="@{favouritesEntity.resultRecipe.vegan}"
+                    android:contentDescription="@string/veganIcon"
+                    app:layout_constraintStart_toEndOf="@+id/favourite_time_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/favourite_time_imageView"
+                    app:srcCompat="@drawable/ic_vegan" />
+
+                <TextView
+                    android:id="@+id/favourite_vegan_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isVegan="@{favouritesEntity.resultRecipe.vegan}"
+                    android:text="@string/vegan"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="@+id/favourite_vegan_imageView"
+                    app:layout_constraintStart_toStartOf="@+id/favourite_vegan_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/favourite_vegan_imageView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

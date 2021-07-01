@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    app:layoutDescription="@xml/fragment_overview_scene"
+    tools:context=".ui.fragments.overview.OverviewFragment">
+
+    <ImageView
+        android:id="@+id/recipeImageBackdrop"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:contentDescription="@string/recipes_image_backdrop"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@tools:sample/avatars" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:background="@drawable/gradient_overlay"
+        app:layout_constraintBottom_toBottomOf="@+id/recipeImageBackdrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/recipeImageBackdrop" />
+
+    <ImageView
+        android:id="@+id/like_icon_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_like"
+        android:contentDescription="@string/aggregate_likes_icon"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/likes_tv_details"
+        app:layout_constraintEnd_toEndOf="@+id/cookingTime_icon_details"
+        app:layout_constraintStart_toStartOf="@+id/cookingTime_icon_details"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/likes_tv_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/cookingTime_icon_details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/cookingTime_icon_details"
+        tools:text="21" />
+
+    <ImageView
+        android:id="@+id/cookingTime_icon_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/ic_clock"
+        android:contentDescription="@string/cooking_time_icon"
+        app:layout_constraintBottom_toTopOf="@+id/cooking_time_tv_details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/cooking_time_tv_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/recipeImageBackdrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/cookingTime_icon_details"
+        tools:text="18" />
+
+    <TextView
+        android:id="@+id/recipeTitleDetails"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="12dp"
+        android:fontFamily="@font/courgette"
+        android:textColor="@color/titleColor"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipeImageBackdrop"
+        tools:text="Sample Recipe Title" />
+
+    <!-- 1st Column -->
+
+    <ImageView
+        android:id="@+id/vegetarian_tick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/tickMark"
+        android:src="@drawable/ic_check"
+        app:layout_constraintStart_toStartOf="@+id/recipeTitleDetails"
+        app:layout_constraintTop_toBottomOf="@+id/recipeTitleDetails"
+        app:tint="@color/itemColor" />
+
+    <TextView
+        android:id="@+id/vegetarian_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/vegetarian"
+        android:textColor="@color/itemColor"
+        app:layout_constraintBottom_toBottomOf="@+id/vegetarian_tick"
+        app:layout_constraintStart_toEndOf="@+id/vegetarian_tick"
+        app:layout_constraintTop_toTopOf="@+id/vegetarian_tick" />
+
+    <ImageView
+        android:id="@+id/vegan_tick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/tickMark"
+        android:src="@drawable/ic_check"
+        app:layout_constraintStart_toStartOf="@+id/vegetarian_tick"
+        app:layout_constraintTop_toBottomOf="@+id/vegetarian_tick"
+        app:tint="@color/itemColor" />
+
+    <TextView
+        android:id="@+id/vegan_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/vegan"
+        android:textColor="@color/itemColor"
+        app:layout_constraintBottom_toBottomOf="@+id/vegan_tick"
+        app:layout_constraintStart_toEndOf="@+id/vegan_tick"
+        app:layout_constraintTop_toTopOf="@+id/vegan_tick" />
+
+
+    <!-- 2nd column -->
+
+
+    <ImageView
+        android:id="@+id/glutenFree_tick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:contentDescription="@string/tickMark"
+        android:src="@drawable/ic_check"
+        app:layout_constraintStart_toEndOf="@+id/vegetarian_tv"
+        app:layout_constraintTop_toTopOf="@+id/vegetarian_tick"
+        app:tint="@color/itemColor" />
+
+    <TextView
+        android:id="@+id/glutenFree_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/gluten_free"
+        android:textColor="@color/itemColor"
+        app:layout_constraintBottom_toBottomOf="@+id/glutenFree_tick"
+        app:layout_constraintStart_toEndOf="@+id/glutenFree_tick"
+        app:layout_constraintTop_toTopOf="@+id/glutenFree_tick" />
+
+    <ImageView
+        android:id="@+id/dairyFree_tick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/tickMark"
+        android:src="@drawable/ic_check"
+        app:layout_constraintStart_toStartOf="@+id/glutenFree_tick"
+        app:layout_constraintTop_toBottomOf="@+id/glutenFree_tick"
+        app:tint="@color/itemColor" />
+
+    <TextView
+        android:id="@+id/dairyFree_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/dairy_free"
+        android:textColor="@color/itemColor"
+        app:layout_constraintBottom_toBottomOf="@+id/dairyFree_tick"
+        app:layout_constraintStart_toEndOf="@+id/dairyFree_tick"
+        app:layout_constraintTop_toTopOf="@+id/dairyFree_tick" />
+
+
+    <!-- 3rd column -->
+
+    <ImageView
+        android:id="@+id/healthy_tick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:contentDescription="@string/tickMark"
+        android:src="@drawable/ic_check"
+        app:layout_constraintStart_toEndOf="@+id/glutenFree_tv"
+        app:layout_constraintTop_toTopOf="@+id/glutenFree_tv"
+        app:tint="@color/itemColor" />
+
+    <TextView
+        android:id="@+id/healthy_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/healthy"
+        android:textColor="@color/itemColor"
+        app:layout_constraintBottom_toBottomOf="@+id/healthy_tick"
+        app:layout_constraintStart_toEndOf="@+id/healthy_tick"
+        app:layout_constraintTop_toTopOf="@+id/healthy_tick" />
+
+    <ImageView
+        android:id="@+id/cheap_tick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/tickMark"
+        android:src="@drawable/ic_check"
+        app:layout_constraintStart_toStartOf="@+id/healthy_tick"
+        app:layout_constraintTop_toBottomOf="@+id/healthy_tick"
+        app:tint="@color/itemColor" />
+
+    <TextView
+        android:id="@+id/cheap_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/cheap"
+        android:textColor="@color/itemColor"
+        app:layout_constraintBottom_toBottomOf="@+id/cheap_tick"
+        app:layout_constraintStart_toEndOf="@+id/cheap_tick"
+        app:layout_constraintTop_toTopOf="@+id/cheap_tick" />
+
+    <!-- Description -->
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/description"
+        android:textColor="@color/titleColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/vegan_tick"
+        app:layout_constraintTop_toBottomOf="@+id/vegan_tick" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <TextView
+            android:id="@+id/descriptionTv_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/descriptionColor"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            tools:text="Hello testing things and debugging" />
+
+    </ScrollView>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

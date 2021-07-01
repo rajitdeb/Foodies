@@ -1,0 +1,20 @@
+package com.rajit.foodies.data.database
+
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.rajit.foodies.data.database.entities.FavouritesEntity
+import com.rajit.foodies.data.database.entities.FoodJokeEntity
+import com.rajit.foodies.data.database.entities.RecipesEntity
+
+@Database(
+    entities = [RecipesEntity::class, FavouritesEntity::class, FoodJokeEntity::class],
+    version = 1,
+    exportSchema = false
+)
+@TypeConverters(RecipesTypeConverter::class)
+abstract class RecipesDatabase : RoomDatabase() {
+
+    abstract fun recipesDao(): RecipesDao
+
+}

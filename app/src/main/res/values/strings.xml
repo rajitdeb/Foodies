@@ -1,0 +1,75 @@
+<resources>
+
+    <string name="app_name">Foodies</string>
+
+    <!-- Fragments -->
+    <string name="recipes_fragment">Recipes</string>
+    <string name="favourites_fragment">Favorites</string>
+    <string name="food_joke_fragment">Joke</string>
+
+    <!-- No Internet Views -->
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="slang_no_internet">Fek! You lost connection.</string>
+
+    <!-- Interactive Icon -->
+    <string name="recipe_image">Recipe Image</string>
+    <string name="veganIcon">vegan icon</string>
+    <string name="cooking_time_icon">cooking time icon</string>
+    <string name="aggregate_likes_icon">likes icon</string>
+
+    <!-- Internet Error -->
+    <string name="error_internet_txt">No Internet Connection.</string>
+    <string name="error_icon">Internet Error Icon</string>
+
+    <!-- Meal Types And Diet Types -->
+    <string name="meal_type_txt">Meal Type</string>
+    <string name="main_course">Main Course</string>
+    <string name="side_dish">Side Dish</string>
+    <string name="dessert">Dessert</string>
+    <string name="appetizer">Appetizer</string>
+    <string name="salad">Salad</string>
+    <string name="bread">Bread</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="soup">Soup</string>
+    <string name="beverage">Beverage</string>
+    <string name="sauce">Sauce</string>
+    <string name="marinade">Marinade</string>
+    <string name="fingerfood">Fingerfood</string>
+    <string name="snack">Snack</string>
+    <string name="drink">Drink</string>
+    <string name="diet_type">Diet Type</string>
+    <string name="ketogenic">Ketogenic</string>
+    <string name="pescetarian">Pescetarian</string>
+    <string name="paleo">Paleo</string>
+    <string name="primal">Primal</string>
+    <string name="whole30">Whole30</string>
+    <string name="apply_tbn_txt">Apply</string>
+    <string name="search_recipes">Search Recipes</string>
+
+    <!-- Details Screen -->
+    <string name="overview">Overview</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instructions">Instructions</string>
+    <string name="recipes_image_backdrop">Recipes Image Backdrop</string>
+    <string name="tickMark">TickMark</string>
+
+    <!-- Details Screen Tick -->
+    <string name="vegetarian">Vegetarian</string>
+    <string name="vegan">Vegan</string>
+    <string name="gluten_free">Gluten Free</string>
+    <string name="dairy_free">Dairy Free</string>
+    <string name="healthy">Healthy</string>
+    <string name="cheap">Cheap</string>
+    <string name="description">Description</string>
+    <string name="ingredients_image">Ingredients Image</string>
+    <string name="save_to_favourites">Save to Favourites</string>
+    <string name="empty_favourites_list_icon">Empty Favourites List Icon</string>
+    <string name="nothing_to_show">Nothing to show</string>
+    <string name="delete">Delete</string>
+    <string name="delete_all">Delete All</string>
+
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="share">Share</string>
+
+</resources>
