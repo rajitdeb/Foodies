@@ -7,26 +7,24 @@ A food recipes app with information about the different dishes and the steps to 
 
 ![Project Thumbnail](assets/Web-Thumbnail.png)
 
-Screenshots
------------
-![](https://i.postimg.cc/ydcSPCYd/0.png)
-![](https://i.postimg.cc/bNXmpq26/1.jpg)
-![](https://i.postimg.cc/MpHMLQKg/2.jpg)
-![](https://i.postimg.cc/W3GhZmXq/3.jpg)
-![](https://i.postimg.cc/JnMR9f5t/4.jpg)
-![](https://i.postimg.cc/T1HG5pMW/5.jpg)
-![](https://i.postimg.cc/CKV0q3tJ/6.jpg)
-![](https://i.postimg.cc/MHXJwqMZ/7.jpg)
-![](https://i.postimg.cc/KvkhschJ/8.jpg)
-![](https://i.postimg.cc/SNBb00yq/9.jpg)
-![](https://i.postimg.cc/zfksRVTX/10.jpg)
-![](https://i.postimg.cc/nzc6Kp1K/11.jpg)
-![](https://i.postimg.cc/jdJB48y1/12.jpg)
-![](https://i.postimg.cc/mgYq0tXN/13.jpg)
-
 Download
 --------
 APK can be found [here][1]
+
+Screenshots
+-----------
+
+| Screenshot 1  | Screenshot 2  | Screenshot 3 |
+| --------------- | --------------- |------------|
+| <img src="assets/1.jpg" width="400"> | <img src="assets/2.jpg" width="400"> | <img src="assets/3.jpg" width="400"> |
+| Screenshot 4  | Screenshot 5  | Screenshot 6 |
+| <img src="assets/4.jpg" width="400"> | <img src="assets/5.jpg" width="400"> | <img src="assets/6.jpg" width="400"> |
+| Screenshot 7  | Screenshot 8  | Screenshot 9 |
+| <img src="assets/7.jpg" width="400"> | <img src="assets/8.jpg" width="400"> | <img src="assets/9.jpg" width="400"> |
+| Screenshot 10  | Screenshot 11  | Screenshot 12 |
+| <img src="assets/10.jpg" width="400"> | <img src="assets/11.jpg" width="400"> | <img src="assets/12.jpg" width="400"> |
+| Screenshot 13  |
+| <img src="assets/13.jpg" width="400"> |
 
 Libraries Used
 --------------
@@ -68,7 +66,7 @@ Project Structure
 | Package Name   | What is it used for  |
 | :------------ | :------------ |
 | adapters | contains all the adapters used in recycler views |
-| bindingadapters | contains all the binding adapters (used in XML layouts) |
+| binding adapters | contains all the binding adapters (used in XML layouts) |
 | data | contains the data source (remote, local and datastore preferences)   |
 | di | contains all the dependency injection modules |
 | ui | contains all the activities, fragments and bottomsheet |
@@ -77,12 +75,12 @@ Project Structure
 
 Author
 ------
-Rajit Deb
+<b>Rajit Deb</b>
 
 Find me on
 ----------
 [![LinkedIn Profile](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/imrajit/)
 [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/rajit.deb/)
 
-[1]: https://github.com/rajitdeb/Foodies/raw/master/foodies_latest_build.apk
+[1]: https://github.com/rajitdeb/Foodies/raw/master/foodies_final_build.apk
 [2]: https://spoonacular.com/food-api/console#Dashboard
