@@ -66,6 +66,9 @@ class DetailsActivity : AppCompatActivity() {
             this
         )
 
+        // disable swiping in viewpager to avoid conflicts between tab layout gestures
+        // and motion layout gestures
+        binding.viewPager2.isUserInputEnabled = false
         binding.viewPager2.apply {
             adapter = pagerAdapter
         }

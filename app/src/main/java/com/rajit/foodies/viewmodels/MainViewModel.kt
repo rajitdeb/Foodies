@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.util.Log
 import androidx.lifecycle.*
 import com.rajit.foodies.data.Repository
 import com.rajit.foodies.data.database.entities.FavouritesEntity
@@ -81,6 +82,7 @@ class MainViewModel @Inject constructor(
             try {
 
                 val response = repository.remote.getFoodJoke(apiKey)
+                Log.d("FoodJokeResponse", response.body().toString())
                 foodJokeResponse.value = handleFoodJokeResponse(response)
 
                 val foodJoke = foodJokeResponse.value!!.data

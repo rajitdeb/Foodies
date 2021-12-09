@@ -1,5 +1,6 @@
 package com.rajit.foodies.data
 
+import android.util.Log
 import com.rajit.foodies.data.network.FoodRecipesApi
 import com.rajit.foodies.models.FoodJoke
 import com.rajit.foodies.models.FoodRecipes
@@ -23,7 +24,9 @@ class RemoteDataSource @Inject constructor(
 
     // this is for getting food joke (random)
     suspend fun getFoodJoke(apiKey: String): Response<FoodJoke> {
-        return foodRecipesApi.getFoodJoke(apiKey)
+        val response = foodRecipesApi.getFoodJoke(apiKey)
+//        Log.d("FoodJokeResponse", response.toString())
+        return response
     }
 
 }
