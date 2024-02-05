@@ -1,5 +1,5 @@
 # Foodies
-A food recipes app with information about the different dishes and the steps to prepare it
+A food recipes app with information about the different dishes and the steps to prepare it. This project is part of a course material that i followed to learn Kotlin, Jetpack Components etc.
 
 ![Made With - Android](https://img.shields.io/badge/Made_With-Android-2ea44f?logo=android)
 ![Powered by - Kotlin](https://img.shields.io/badge/Powered_by-Kotlin-B322E9)
