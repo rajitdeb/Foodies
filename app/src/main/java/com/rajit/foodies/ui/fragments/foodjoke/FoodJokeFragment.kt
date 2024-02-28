@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -34,8 +36,6 @@ class FoodJokeFragment : Fragment() {
         _binding = FragmentFoodJokeBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.mainViewModel = mainViewModel
-
-        setHasOptionsMenu(true)
 
         mainViewModel.getFoodJoke(API_KEY)
 
@@ -67,6 +67,35 @@ class FoodJokeFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // New Way to create Options Menu
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object : MenuProvider {
+
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.food_joke_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                if (menuItem.itemId == R.id.share_joke) {
+                    val shareIntent = Intent().apply {
+                        this.action = Intent.ACTION_SEND
+                        this.putExtra(Intent.EXTRA_TEXT, foodJoke)
+                        this.type = "text/plain"
+                    }
+
+                    startActivity(shareIntent)
+                }
+                return true
+            }
+
+        }, viewLifecycleOwner)
+
+    }
+
     // load data from ROOM
     private fun loadDataFromCache() {
         lifecycleScope.launch {
@@ -77,23 +106,6 @@ class FoodJokeFragment : Fragment() {
                 }
             }
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.food_joke_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.share_joke) {
-            val shareIntent = Intent().apply {
-                this.action = Intent.ACTION_SEND
-                this.putExtra(Intent.EXTRA_TEXT, foodJoke)
-                this.type = "text/plain"
-            }
-
-            startActivity(shareIntent)
-        }
-        return true
     }
 
     override fun onDestroyView() {

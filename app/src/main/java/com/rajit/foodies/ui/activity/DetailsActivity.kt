@@ -3,10 +3,12 @@ package com.rajit.foodies.ui.activity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.MenuProvider
 import androidx.navigation.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
@@ -42,6 +44,29 @@ class DetailsActivity : AppCompatActivity() {
         binding.toolBar.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        // New way to create Options menu
+        addMenuProvider(object : MenuProvider {
+
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.details_menu, menu)
+                menuItem = menu.findItem(R.id.saveToFavourite)
+                checkSavedRecipe(menuItem)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                val itemId = menuItem.itemId
+
+                if (itemId == android.R.id.home) {
+                    finish()
+                } else if (itemId == R.id.saveToFavourite && !isRecipeSaved) {
+                    saveFavourites(menuItem)
+                } else if (itemId == R.id.saveToFavourite && isRecipeSaved) {
+                    removeFromFavourites(menuItem)
+                }
+                return true
+            }
+        })
+
         // Adding fragments to list
         val fragments = ArrayList<androidx.fragment.app.Fragment>()
         fragments.add(OverviewFragment())
@@ -76,18 +101,6 @@ class DetailsActivity : AppCompatActivity() {
         }.attach()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val itemId = item.itemId
-        if (itemId == android.R.id.home) {
-            finish()
-        } else if (itemId == R.id.saveToFavourite && !isRecipeSaved) {
-            saveFavourites(item)
-        } else if (itemId == R.id.saveToFavourite && isRecipeSaved) {
-            removeFromFavourites(item)
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     private fun removeFromFavourites(item: MenuItem) {
         val favouritesEntity = FavouritesEntity(
             savedRecipeID,
@@ -118,13 +131,6 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun changeItemColor(item: MenuItem, color: Int) {
         item.icon?.setTint(ContextCompat.getColor(this, color))
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.details_menu, menu)
-        menuItem = menu!!.findItem(R.id.saveToFavourite)
-        checkSavedRecipe(menuItem)
-        return true
     }
 
     private fun checkSavedRecipe(item: MenuItem) {

@@ -2,6 +2,8 @@ package com.rajit.foodies.ui.fragments.favourites
 
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,8 +36,6 @@ class FavoritesFragment : Fragment() {
         binding.mainViewModel = mainViewModel
         binding.mAdapter = mAdapter
 
-        setHasOptionsMenu(true)
-
         binding.favouritesRv.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = mAdapter
@@ -44,20 +44,31 @@ class FavoritesFragment : Fragment() {
         return binding.root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.favourites_delete_all_menu, menu)
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.deleteAllFavourites) {
-            if(mainViewModel.readFavouriteRecipes.value!!.isNotEmpty()){
-                mainViewModel.deleteAllFavourites()
-                showSnackBar("All recipes removed")
-            } else{
-                showSnackBar("Nothing to delete")
+        // New way to create Options menu
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.favourites_delete_all_menu, menu)
             }
-        }
-        return super.onOptionsItemSelected(item)
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                if (menuItem.itemId == R.id.deleteAllFavourites) {
+                    if(mainViewModel.readFavouriteRecipes.value!!.isNotEmpty()){
+                        mainViewModel.deleteAllFavourites()
+                        showSnackBar("All recipes removed")
+                    } else{
+                        showSnackBar("Nothing to delete")
+                    }
+                }
+                return true
+            }
+
+        }, viewLifecycleOwner)
+
     }
 
     private fun showSnackBar(message: String) {

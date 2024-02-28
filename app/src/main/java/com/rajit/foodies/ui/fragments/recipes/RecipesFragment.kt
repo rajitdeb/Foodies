@@ -2,12 +2,18 @@ package com.rajit.foodies.ui.fragments.recipes
 
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -21,7 +27,6 @@ import com.rajit.foodies.utils.observeOnce
 import com.rajit.foodies.viewmodels.MainViewModel
 import com.rajit.foodies.viewmodels.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -36,6 +41,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val mainViewModel by viewModels<MainViewModel>()
     private val recipesViewModel by viewModels<RecipesViewModel>()
+
     private val mAdapter: RecipesAdapter by lazy { RecipesAdapter() }
 
     private var searchView: SearchView? = null
@@ -48,8 +54,6 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         _binding = FragmentRecipiesBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.myMainViewmodel = mainViewModel
-
-        setHasOptionsMenu(true)
 
         setupRecyclerView()
 
@@ -65,9 +69,9 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
                 }
         }
 
-        recipesViewModel.readBackOnline.observe(viewLifecycleOwner, {
+        recipesViewModel.readBackOnline.observe(viewLifecycleOwner) {
             recipesViewModel.backOnline = it
-        })
+        }
 
         binding.recipesFab.setOnClickListener {
             if (recipesViewModel.networkStatus) {
@@ -80,21 +84,37 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object : MenuProvider {
+
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.recipes_menu, menu)
+
+                val search = menu.findItem(R.id.search_recipes)
+                searchView = search.actionView as? SearchView
+                searchView?.isSubmitButtonEnabled = true
+                searchView?.setOnQueryTextListener(this@RecipesFragment)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                // Do nothing
+                return true
+            }
+
+        }, viewLifecycleOwner)
+
+    }
+
     private fun setupRecyclerView() {
         binding.recyclerView.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(requireContext())
             showShimmerEffect()
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.recipes_menu, menu)
-
-        val search = menu.findItem(R.id.search_recipes)
-        searchView = search.actionView as? SearchView
-        searchView?.isSubmitButtonEnabled = true
-        searchView?.setOnQueryTextListener(this)
     }
 
     // Searching for a recipe: Pressed Search btn
@@ -151,7 +171,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         lifecycleScope.launch {
             // This observeOnce is a custom extension function and is used to restrict this code
             // to be called only once
-            mainViewModel.readRecipes.observeOnce(viewLifecycleOwner, { database ->
+            mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { database ->
                 if (database.isNotEmpty() && !args.backFromBottomSheet) {
                     Log.d("Recipes Fragment", "readDatabase called ")
                     mAdapter.setData(database[0].foodRecipes)
@@ -159,7 +179,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
                 } else {
                     requestDataFromApi()
                 }
-            })
+            }
         }
     }
 
