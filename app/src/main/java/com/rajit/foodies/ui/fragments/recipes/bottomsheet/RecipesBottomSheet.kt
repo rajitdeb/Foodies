@@ -39,7 +39,7 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = RecipesBottomSheetBinding.inflate(inflater, container, false)
 
@@ -52,25 +52,25 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
         }
 
         // getting the values from selected chips (Meal Type)
-        binding.mealTypeChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
-            val chip = group.findViewById<Chip>(selectedChipId)
+        binding.mealTypeChipGroup.setOnCheckedStateChangeListener { group, selectedChipID ->
+            val chip = group.findViewById<Chip>(selectedChipID.first())
             val selectedMealType = chip.text.toString().lowercase(Locale.ROOT)
             mealType = selectedMealType
-            mealTypeId = selectedChipId
+            mealTypeId = selectedChipID.first()
         }
 
         // getting the values from selected chips (Diet Type)
-        binding.dietTypeChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
-            val chip = group.findViewById<Chip>(selectedChipId)
+        binding.dietTypeChipGroup.setOnCheckedStateChangeListener { group, selectedChipID ->
+            val chip = group.findViewById<Chip>(selectedChipID.first())
             val selectedDietType = chip.text.toString().lowercase(Locale.ROOT)
             dietType = selectedDietType
-            dietTypeId = selectedChipId
+            dietTypeId = selectedChipID.first()
         }
 
         binding.applyBtn.setOnClickListener {
             recipesViewModel.saveMealAndDietType(mealType, mealTypeId, dietType, dietTypeId)
-            val action =
-                RecipesBottomSheetDirections.actionRecipesBottomSheetToRecipesFragment(true)
+            val action = RecipesBottomSheetDirections
+                .actionRecipesBottomSheetToRecipesFragment(true)
             findNavController().navigate(action)
         }
 
