@@ -7,7 +7,6 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
@@ -20,7 +19,6 @@ import com.rajit.foodies.ui.fragments.instructions.InstructionsFragment
 import com.rajit.foodies.ui.fragments.overview.OverviewFragment
 import com.rajit.foodies.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 
 @AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
@@ -119,7 +117,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun changeItemColor(item: MenuItem, color: Int) {
-        item.icon.setTint(ContextCompat.getColor(this, color))
+        item.icon?.setTint(ContextCompat.getColor(this, color))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

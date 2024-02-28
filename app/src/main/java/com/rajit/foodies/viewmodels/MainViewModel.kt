@@ -99,7 +99,7 @@ class MainViewModel @Inject constructor(
     }
 
     // handling network response codes
-    private fun handleFoodJokeResponse(response: Response<FoodJoke>): NetworkResult<FoodJoke>? {
+    private fun handleFoodJokeResponse(response: Response<FoodJoke>): NetworkResult<FoodJoke> {
         return when {
             response.message().contains("timeout") -> {
                 NetworkResult.Error("Network Timeout")
@@ -199,7 +199,7 @@ class MainViewModel @Inject constructor(
                 return NetworkResult.Error("API Key Limitation")
             }
 
-            response.body()!!.results.isNullOrEmpty() -> {
+            response.body()!!.results.isEmpty() -> {
                 return NetworkResult.Error("Recipes not found")
             }
 
