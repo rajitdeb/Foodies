@@ -1,9 +1,6 @@
 package com.rajit.foodies.ui.activity
 
-import android.os.Build
 import android.os.Bundle
-import android.view.View
-import android.view.WindowInsetsController
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
