@@ -7,10 +7,6 @@ A food recipes app with information about the different dishes and the steps to 
 
 ![Project Thumbnail](assets/Web-Thumbnail.png)
 
-Download
---------
-APK can be found [here][1]
-
 Screenshots
 -----------
 
@@ -80,7 +76,6 @@ Author
 Find me on
 ----------
 [![LinkedIn Profile](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/imrajit/)
-[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/rajit.deb/)
 
 [1]: https://github.com/rajitdeb/Foodies/raw/master/foodies_final_build.apk
 [2]: https://spoonacular.com/food-api/console#Dashboard
