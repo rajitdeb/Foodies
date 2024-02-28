@@ -14,7 +14,9 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,6 +48,8 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private var searchView: SearchView? = null
 
+    private var isDataAlreadyRequested = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,15 +62,17 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         setupRecyclerView()
 
         // checking network state
-        lifecycleScope.launchWhenStarted {
-            networkListener = NetworkListener()
-            networkListener.checkNetworkAvailability(requireContext())
-                .collect { status ->
-                    Log.d("RecipesFragment/NetworkListener", "Status: $status")
-                    recipesViewModel.networkStatus = status
-                    recipesViewModel.showNetworkStatus()
-                    readDatabase()
-                }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                networkListener = NetworkListener()
+                networkListener.checkNetworkAvailability(requireContext())
+                    .collect { status ->
+                        Log.d("RecipesFragment/NetworkListener", "Status: $status")
+                        recipesViewModel.networkStatus = status
+                        recipesViewModel.showNetworkStatus()
+                        readDatabase()
+                    }
+            }
         }
 
         recipesViewModel.readBackOnline.observe(viewLifecycleOwner) {
@@ -172,12 +178,17 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
             // This observeOnce is a custom extension function and is used to restrict this code
             // to be called only once
             mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { database ->
-                if (database.isNotEmpty() && !args.backFromBottomSheet) {
+                if (database.isNotEmpty() && !args.backFromBottomSheet ||
+                    database.isNotEmpty() && isDataAlreadyRequested
+                ) {
                     Log.d("Recipes Fragment", "readDatabase called ")
                     mAdapter.setData(database[0].foodRecipes)
                     hideShimmerEffect()
                 } else {
-                    requestDataFromApi()
+                    if(!isDataAlreadyRequested) {
+                        requestDataFromApi()
+                        isDataAlreadyRequested = true
+                    }
                 }
             }
         }
