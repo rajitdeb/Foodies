@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
@@ -17,12 +16,11 @@ import com.rajit.foodies.utils.Constants.Companion.DEFAULT_DIET_TYPE
 import com.rajit.foodies.utils.Constants.Companion.DEFAULT_MEAL_TYPE
 import com.rajit.foodies.viewmodels.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
+import java.util.Locale
 
 /**
  * This is a bottom sheet fragment used in [RecipesFragment::class].
  **/
-
 private const val TAG = "RecipesBottomSheet"
 
 @AndroidEntryPoint
@@ -70,11 +68,6 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
         }
 
         binding.applyBtn.setOnClickListener {
-//            Toast.makeText(
-//                requireContext(),
-//                "mealType: $mealType, dietType: $dietType",
-//                Toast.LENGTH_SHORT
-//            ).show()
             recipesViewModel.saveMealAndDietType(mealType, mealTypeId, dietType, dietTypeId)
             val action =
                 RecipesBottomSheetDirections.actionRecipesBottomSheetToRecipesFragment(true)
